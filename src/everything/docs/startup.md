@@ -1,73 +1,76 @@
-# Everything Server - Startup Process
+# Everything Server - 启动流程
 
-**[Architecture](architecture.md)
-| [Project Structure](structure.md)
-| Startup Process
-| [Server Features](features.md)
-| [Extension Points](extension.md)
-| [How It Works](how-it-works.md)**
+**[架构](architecture.md)
+| [项目结构](structure.md)
+| 启动流程
+| [服务特性](features.md)
+| [扩展点](extension.md)
+| [工作机制](how-it-works.md)**
 
-## 1. Everything Server Launcher
+## 1. Everything Server 启动器
 
-- Usage `node dist/index.js [stdio|sse|streamableHttp]`
-- Runs the specified **transport manager** to handle client connections.
-- Specify transport type on command line (default `stdio`)
+- 用法：`node dist/index.js [stdio|sse|streamableHttp]`
+- 根据指定参数运行对应的**传输管理器**
+- 通过命令行指定传输类型（默认 `stdio`）
   - `stdio` → `transports/stdio.js`
   - `sse` → `transports/sse.js`
   - `streamableHttp` → `transports/streamableHttp.js`
 
-## 2. The Transport Manager
+## 2. 传输管理器（Transport Manager）
 
-- Creates a server instance using `createServer()` from `server/index.ts`
-  - Connects it to the chosen transport type from the MCP SDK.
-- Handles communication according to the MCP specs for the chosen transport.
-  - **STDIO**:
-    - One simple, process‑bound connection.
-    - Calls`clientConnect()` upon connection.
-    - Closes and calls `cleanup()` on `SIGINT`.
-  - **SSE**:
-    - Supports multiple client connections.
-    - Client transports are mapped to `sessionId`;
-    - Calls `clientConnect(sessionId)` upon connection.
-    - Hooks server’s `onclose` to clean and remove session.
-    - Exposes
-      - `/sse` **GET** (SSE stream)
-      - `/message` **POST** (JSON‑RPC messages)
-  - **Streamable HTTP**:
-    - Supports multiple client connections.
-    - Client transports are mapped to `sessionId`;
-    - Calls `clientConnect(sessionId)` upon connection.
-    - Exposes `/mcp` for
-      - **POST** (JSON‑RPC messages)
-      - **GET** (SSE stream)
-      - **DELETE** (termination)
-    - Uses an event store for resumability and stores transports by `sessionId`.
-    - Calls `cleanup(sessionId)` on **DELETE**.
+- 通过 `server/index.ts` 的 `createServer()` 创建服务实例
+  - 并连接到 MCP SDK 中对应传输实现
+- 按 MCP 规范处理该传输下的通信
 
-## 3. The Server Factory
+  - **STDIO**
+    - 进程绑定、单连接模型
+    - 连接后调用 `clientConnect()`
+    - `SIGINT` 时关闭并调用 `cleanup()`
 
-- Invoke `createServer()` from `server/index.ts`
-- Creates a new `McpServer` instance with
-  - **Capabilities**:
+  - **SSE**
+    - 支持多客户端连接
+    - 客户端传输实例按 `sessionId` 进行映射
+    - 连接后调用 `clientConnect(sessionId)`
+    - 通过 `onclose` 清理并移除 session
+    - 暴露接口：
+      - `/sse`（`GET`，SSE 流）
+      - `/message`（`POST`，JSON-RPC 消息）
+
+  - **Streamable HTTP**
+    - 支持多客户端连接
+    - 客户端传输按 `sessionId` 映射
+    - 连接后调用 `clientConnect(sessionId)`
+    - 暴露 `/mcp`：
+      - `POST`（JSON-RPC 消息）
+      - `GET`（SSE 流）
+      - `DELETE`（终止会话）
+    - 使用 event store 实现可恢复能力，并按 `sessionId` 保存 transport
+    - 在 `DELETE` 时调用 `cleanup(sessionId)`
+
+## 3. 服务工厂（Server Factory）
+
+- 调用 `server/index.ts` 中的 `createServer()`
+- 创建新的 `McpServer` 实例，包含：
+  - **Capabilities**
     - `tools: {}`
     - `logging: {}`
     - `prompts: {}`
     - `resources: { subscribe: true }`
   - **Server Instructions**
-    - Loaded from the docs folder (`server-instructions.md`).
-  - **Registrations**
-    - Registers **tools** via `registerTools(server)`.
-    - Registers **resources** via `registerResources(server)`.
-    - Registers **prompts** via `registerPrompts(server)`.
-  - **Other Request Handlers**
-    - Sets up resource subscription handlers via `setSubscriptionHandlers(server)`.
-    - Roots list change handler is added post-connection via
-  - **Returns**
-    - The `McpServer` instance
-    - A `clientConnect(sessionId)` callback that enables post-connection setup
-    - A `cleanup(sessionId?)` callback that stops any active intervals and removes any session‑scoped state
+    - 从 docs 目录（`server-instructions.md`）加载
+  - **注册项**
+    - `registerTools(server)` 注册 tools
+    - `registerResources(server)` 注册 resources
+    - `registerPrompts(server)` 注册 prompts
+  - **其他处理器**
+    - `setSubscriptionHandlers(server)` 设置资源订阅处理
+    - roots list change 处理器在连接后阶段添加
+  - **返回值**
+    - `McpServer` 实例
+    - `clientConnect(sessionId)`：连接后初始化钩子
+    - `cleanup(sessionId?)`：停止定时任务并清理会话态数据
 
-## Enabling Multiple Clients
+## 启用多客户端
 
-Some of the transport managers defined in the `transports` folder can support multiple clients.
-In order to do so, they must map certain data to a session identifier.
+`transports` 目录中部分传输管理器支持多客户端。  
+要实现多客户端，需把相关状态按 `sessionId` 进行映射管理。

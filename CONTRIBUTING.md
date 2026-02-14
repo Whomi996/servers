@@ -1,40 +1,40 @@
-# Contributing to MCP Servers
+# 为 MCP Servers 做贡献
 
-Thanks for your interest in contributing! Here's how you can help make this repo better.
+感谢你对贡献的兴趣！以下是你可以帮助改进此仓库的方式。
 
-We accept changes through [the standard GitHub flow model](https://docs.github.com/en/get-started/using-github/github-flow).
+我们通过 [GitHub 标准工作流（GitHub Flow）](https://docs.github.com/en/get-started/using-github/github-flow) 接收变更。
 
-## Server Listings
+## 服务列表（Server Listings）
 
-We are **no longer accepting PRs** to add server links to the README. Please publish your server to the [MCP Server Registry](https://github.com/modelcontextprotocol/registry) instead. Follow the [quickstart guide](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx).
+我们**不再接受**通过 PR 往 README 中新增服务器链接。请改为将你的服务器发布到 [MCP Server Registry](https://github.com/modelcontextprotocol/registry)。可参考 [快速开始指南](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx)。
 
-You can browse published servers using the simple UI at [https://registry.modelcontextprotocol.io/](https://registry.modelcontextprotocol.io/).
+你也可以通过这个简单界面浏览已发布服务器：[https://registry.modelcontextprotocol.io/](https://registry.modelcontextprotocol.io/)。
 
-## Server Implementations
+## 服务实现（Server Implementations）
 
-We welcome:
-- **Bug fixes** — Help us squash those pesky bugs.
-- **Usability improvements** — Making servers easier to use for humans and agents.
-- **Enhancements that demonstrate MCP protocol features** — We encourage contributions that help reference servers better illustrate underutilized aspects of the MCP protocol beyond just Tools, such as Resources, Prompts, or Roots. For example, adding Roots support to filesystem-server helps showcase this important but lesser-known feature.
+我们欢迎：
+- **Bug 修复**：帮助我们消灭恼人的缺陷。
+- **可用性改进**：让人类和智能体更容易使用这些服务器。
+- **展示 MCP 协议能力的增强**：我们鼓励能更好展示 MCP 协议能力的贡献，不要只局限于 Tools，也包括 Resources、Prompts、Roots 等。例如，为 filesystem-server 增加 Roots 支持，就能展示这个重要但相对少见的特性。
 
-We're more selective about:
-- **Other new features** — Especially if they're not crucial to the server's core purpose or are highly opinionated. The existing servers are reference servers meant to inspire the community. If you need specific features, we encourage you to build enhanced versions and publish them to the [MCP Server Registry](https://github.com/modelcontextprotocol/registry)! We think a diverse ecosystem of servers is beneficial for everyone.
+我们会更谨慎评估：
+- **其他新功能**：尤其是与服务器核心目标关联不强、或主观性较高的功能。现有服务器主要是参考实现，用于启发社区。如果你需要特定功能，我们鼓励你构建增强版本并发布到 [MCP Server Registry](https://github.com/modelcontextprotocol/registry)。我们认为多样化的服务器生态对所有人都有益。
 
-We don't accept:
-- **New server implementations** — We encourage you to publish them to the [MCP Server Registry](https://github.com/modelcontextprotocol/registry) instead.
+我们不接受：
+- **新增服务器实现**：请改为发布到 [MCP Server Registry](https://github.com/modelcontextprotocol/registry)。
 
-## Testing
+## 测试
 
-When adding or configuring tests for servers implemented in TypeScript, use **vitest** as the test framework. Vitest provides better ESM support, faster test execution, and a more modern testing experience.
+当你为 TypeScript 实现的服务器新增或配置测试时，请使用 **vitest** 作为测试框架。Vitest 对 ESM 支持更好、执行更快、测试体验也更现代。
 
-## Documentation
+## 文档
 
-Improvements to existing documentation is welcome - although generally we'd prefer ergonomic improvements than documenting pain points if possible!
+欢迎改进现有文档。不过一般来说，我们更偏好通过可用性改进来消除痛点，而不是仅仅记录痛点。
 
-We're more selective about adding wholly new documentation, especially in ways that aren't vendor neutral (e.g. how to run a particular server with a particular client).
+对于全新的文档内容，我们会更谨慎，特别是那些不够厂商中立的内容（例如“如何用某个特定客户端运行某个特定服务器”）。
 
-## Community
+## 社区
 
-[Learn how the MCP community communicates](https://modelcontextprotocol.io/community/communication).
+[了解 MCP 社区如何沟通](https://modelcontextprotocol.io/community/communication)。
 
-Thank you for helping make MCP servers better for everyone!
+感谢你帮助 MCP servers 变得更好！

@@ -1,23 +1,23 @@
-# Everything Server - Extension Points
+# Everything Server - 扩展点
 
-**[Architecture](architecture.md)
-| [Project Structure](structure.md)
-| [Startup Process](startup.md)
-| [Server Features](features.md)
-| Extension Points
-| [How It Works](how-it-works.md)**
+**[架构](architecture.md)
+| [项目结构](structure.md)
+| [启动流程](startup.md)
+| [服务特性](features.md)
+| 扩展点
+| [工作机制](how-it-works.md)**
 
-## Adding Tools
+## 添加工具（Tools）
 
-- Create a new file under `tools/` with your `registerXTool(server)` function that registers the tool via `server.registerTool(...)`.
-- Export and call it from `tools/index.ts` inside `registerTools(server)`.
+- 在 `tools/` 下新建文件，提供 `registerXTool(server)` 函数，内部通过 `server.registerTool(...)` 注册。
+- 在 `tools/index.ts` 的 `registerTools(server)` 中导出并调用。
 
-## Adding Prompts
+## 添加提示词（Prompts）
 
-- Create a new file under `prompts/` with your `registerXPrompt(server)` function that registers the prompt via `server.registerPrompt(...)`.
-- Export and call it from `prompts/index.ts` inside `registerPrompts(server)`.
+- 在 `prompts/` 下新建文件，提供 `registerXPrompt(server)` 函数，内部通过 `server.registerPrompt(...)` 注册。
+- 在 `prompts/index.ts` 的 `registerPrompts(server)` 中导出并调用。
 
-## Adding Resources
+## 添加资源（Resources）
 
-- Create a new file under `resources/` with your `registerXResources(server)` function using `server.registerResource(...)` (optionally with `ResourceTemplate`).
-- Export and call it from `resources/index.ts` inside `registerResources(server)`.
+- 在 `resources/` 下新建文件，提供 `registerXResources(server)`，通过 `server.registerResource(...)`（可选结合 `ResourceTemplate`）注册。
+- 在 `resources/index.ts` 的 `registerResources(server)` 中导出并调用。

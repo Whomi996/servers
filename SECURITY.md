@@ -1,16 +1,17 @@
-# Security Policy
-Thank you for helping us keep our MCP servers secure.
+# 安全策略
 
-The **reference servers** in this repo are maintained by [Anthropic](https://www.anthropic.com/) as part of the Model Context Protocol project.
+感谢你帮助我们保障 MCP 服务器的安全。
 
-The security of our systems and user data is Anthropic's top priority. We appreciate the work of security researchers acting in good faith in identifying and reporting potential vulnerabilities.
+本仓库中的**参考服务器**由 [Anthropic](https://www.anthropic.com/) 作为 Model Context Protocol 项目的一部分进行维护。
 
-## Important Notice
+Anthropic 将系统与用户数据安全视为最高优先级。我们感谢以善意方式识别并报告潜在漏洞的安全研究人员。
 
-The servers in this repository are **reference implementations** intended to demonstrate MCP features and SDK usage. They serve as educational examples for developers building their own MCP servers, not as production-ready solutions.
+## 重要说明
 
-**Bug bounties are not awarded for security vulnerabilities found in these reference servers.** Our bug bounty program applies exclusively to the [MCP SDKs](https://github.com/modelcontextprotocol) maintained by Anthropic. If you discover a vulnerability in an MCP SDK that is maintained by Anthropic, please report it through our vulnerability disclosure program below.
+此仓库中的服务器属于**参考实现**，用于展示 MCP 功能和 SDK 用法。它们是面向开发者的教学示例，帮助你构建自己的 MCP 服务器，而不是可直接用于生产环境的方案。
 
-## Vulnerability Disclosure Program
+**针对这些参考服务器中发现的安全漏洞，不提供漏洞赏金。** 我们的漏洞赏金计划仅适用于 Anthropic 维护的 [MCP SDK](https://github.com/modelcontextprotocol)。如果你在 Anthropic 维护的 MCP SDK 中发现漏洞，请通过下方漏洞披露流程提交。
 
-Our Vulnerability Program guidelines are defined on our [HackerOne program page](https://hackerone.com/anthropic-vdp). We ask that any validated vulnerability in this functionality be reported through the [submission form](https://hackerone.com/anthropic-vdp/reports/new?type=team&report_type=vulnerability).
+## 漏洞披露计划
+
+我们的漏洞披露指南定义在 [HackerOne 项目页面](https://hackerone.com/anthropic-vdp)。对于此功能中经验证的漏洞，请通过 [提交表单](https://hackerone.com/anthropic-vdp/reports/new?type=team&report_type=vulnerability) 报告。

@@ -1,16 +1,18 @@
 # Knowledge Graph Memory Server
 
-A basic implementation of persistent memory using a local knowledge graph. This lets Claude remember information about the user across chats.
+一个基于本地知识图谱的持久化记忆基础实现。它可以让 Claude 在多轮对话之间记住用户信息。
 
-## Core Concepts
+## 核心概念
 
-### Entities
-Entities are the primary nodes in the knowledge graph. Each entity has:
-- A unique name (identifier)
-- An entity type (e.g., "person", "organization", "event")
-- A list of observations
+### Entities（实体）
 
-Example:
+实体是知识图谱中的核心节点。每个实体包含：
+- 唯一名称（标识符）
+- 实体类型（例如 `person`、`organization`、`event`）
+- 一组观察信息（observations）
+
+示例：
+
 ```json
 {
   "name": "John_Smith",
@@ -19,10 +21,12 @@ Example:
 }
 ```
 
-### Relations
-Relations define directed connections between entities. They are always stored in active voice and describe how entities interact or relate to each other.
+### Relations（关系）
 
-Example:
+关系用于定义实体之间的有向连接。关系始终使用主动语态，描述实体如何交互或关联。
+
+示例：
+
 ```json
 {
   "from": "John_Smith",
@@ -30,15 +34,18 @@ Example:
   "relationType": "works_at"
 }
 ```
-### Observations
-Observations are discrete pieces of information about an entity. They are:
 
-- Stored as strings
-- Attached to specific entities
-- Can be added or removed independently
-- Should be atomic (one fact per observation)
+### Observations（观察）
 
-Example:
+观察是关于实体的离散信息片段，特点是：
+
+- 以字符串存储
+- 附着在具体实体上
+- 可独立新增或删除
+- 应尽量保持原子性（每条 observation 表达一个事实）
+
+示例：
+
 ```json
 {
   "entityName": "John_Smith",
@@ -53,83 +60,84 @@ Example:
 ## API
 
 ### Tools
+
 - **create_entities**
-  - Create multiple new entities in the knowledge graph
-  - Input: `entities` (array of objects)
-    - Each object contains:
-      - `name` (string): Entity identifier
-      - `entityType` (string): Type classification
-      - `observations` (string[]): Associated observations
-  - Ignores entities with existing names
+  - 在知识图谱中创建多个实体
+  - 输入：`entities`（对象数组）
+    - 每个对象包含：
+      - `name`（string）：实体标识
+      - `entityType`（string）：实体类型
+      - `observations`（string[]）：关联观察
+  - 同名实体会被忽略
 
 - **create_relations**
-  - Create multiple new relations between entities
-  - Input: `relations` (array of objects)
-    - Each object contains:
-      - `from` (string): Source entity name
-      - `to` (string): Target entity name
-      - `relationType` (string): Relationship type in active voice
-  - Skips duplicate relations
+  - 创建多个实体关系
+  - 输入：`relations`（对象数组）
+    - 每个对象包含：
+      - `from`（string）：源实体名
+      - `to`（string）：目标实体名
+      - `relationType`（string）：主动语态关系类型
+  - 重复关系会被跳过
 
 - **add_observations**
-  - Add new observations to existing entities
-  - Input: `observations` (array of objects)
-    - Each object contains:
-      - `entityName` (string): Target entity
-      - `contents` (string[]): New observations to add
-  - Returns added observations per entity
-  - Fails if entity doesn't exist
+  - 为已有实体追加观察信息
+  - 输入：`observations`（对象数组）
+    - 每个对象包含：
+      - `entityName`（string）：目标实体
+      - `contents`（string[]）：要添加的观察
+  - 返回每个实体新增的观察内容
+  - 若实体不存在则失败
 
 - **delete_entities**
-  - Remove entities and their relations
-  - Input: `entityNames` (string[])
-  - Cascading deletion of associated relations
-  - Silent operation if entity doesn't exist
+  - 删除实体及其关系
+  - 输入：`entityNames`（string[]）
+  - 会级联删除关联关系
+  - 实体不存在时静默处理
 
 - **delete_observations**
-  - Remove specific observations from entities
-  - Input: `deletions` (array of objects)
-    - Each object contains:
-      - `entityName` (string): Target entity
-      - `observations` (string[]): Observations to remove
-  - Silent operation if observation doesn't exist
+  - 删除实体上的指定观察
+  - 输入：`deletions`（对象数组）
+    - 每个对象包含：
+      - `entityName`（string）：目标实体
+      - `observations`（string[]）：要删除的观察
+  - 观察不存在时静默处理
 
 - **delete_relations**
-  - Remove specific relations from the graph
-  - Input: `relations` (array of objects)
-    - Each object contains:
-      - `from` (string): Source entity name
-      - `to` (string): Target entity name
-      - `relationType` (string): Relationship type
-  - Silent operation if relation doesn't exist
+  - 删除指定关系
+  - 输入：`relations`（对象数组）
+    - 每个对象包含：
+      - `from`（string）：源实体名
+      - `to`（string）：目标实体名
+      - `relationType`（string）：关系类型
+  - 关系不存在时静默处理
 
 - **read_graph**
-  - Read the entire knowledge graph
-  - No input required
-  - Returns complete graph structure with all entities and relations
+  - 读取完整知识图谱
+  - 无需输入
+  - 返回所有实体与关系
 
 - **search_nodes**
-  - Search for nodes based on query
-  - Input: `query` (string)
-  - Searches across:
-    - Entity names
-    - Entity types
-    - Observation content
-  - Returns matching entities and their relations
+  - 按查询词搜索节点
+  - 输入：`query`（string）
+  - 搜索范围：
+    - 实体名
+    - 实体类型
+    - observation 内容
+  - 返回匹配实体及其关系
 
 - **open_nodes**
-  - Retrieve specific nodes by name
-  - Input: `names` (string[])
-  - Returns:
-    - Requested entities
-    - Relations between requested entities
-  - Silently skips non-existent nodes
+  - 按名称获取指定节点
+  - 输入：`names`（string[]）
+  - 返回：
+    - 请求的实体
+    - 这些实体之间的关系
+  - 不存在的节点会被静默忽略
 
-# Usage with Claude Desktop
+# 在 Claude Desktop 中使用
 
-### Setup
+### 配置
 
-Add this to your claude_desktop_config.json:
+将以下配置添加到 `claude_desktop_config.json`：
 
 #### Docker
 
@@ -145,6 +153,7 @@ Add this to your claude_desktop_config.json:
 ```
 
 #### NPX
+
 ```json
 {
   "mcpServers": {
@@ -159,9 +168,9 @@ Add this to your claude_desktop_config.json:
 }
 ```
 
-#### NPX with custom setting
+#### NPX（自定义配置）
 
-The server can be configured using the following environment variables:
+服务器支持以下环境变量：
 
 ```json
 {
@@ -180,25 +189,25 @@ The server can be configured using the following environment variables:
 }
 ```
 
-- `MEMORY_FILE_PATH`: Path to the memory storage JSONL file (default: `memory.jsonl` in the server directory)
+- `MEMORY_FILE_PATH`：记忆存储 JSONL 文件路径（默认是服务目录下的 `memory.jsonl`）
 
-# VS Code Installation Instructions
+# VS Code 安装说明
 
-For quick installation, use one of the one-click installation buttons below:
+可使用以下一键安装按钮：
 
 [![Install with NPX in VS Code](https://img.shields.io/badge/VS_Code-NPM-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=memory&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40modelcontextprotocol%2Fserver-memory%22%5D%7D) [![Install with NPX in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-NPM-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=memory&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40modelcontextprotocol%2Fserver-memory%22%5D%7D&quality=insiders)
 
 [![Install with Docker in VS Code](https://img.shields.io/badge/VS_Code-Docker-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=memory&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22-v%22%2C%22claude-memory%3A%2Fapp%2Fdist%22%2C%22--rm%22%2C%22mcp%2Fmemory%22%5D%7D) [![Install with Docker in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Docker-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=memory&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22-v%22%2C%22claude-memory%3A%2Fapp%2Fdist%22%2C%22--rm%22%2C%22mcp%2Fmemory%22%5D%7D&quality=insiders)
 
-For manual installation, you can configure the MCP server using one of these methods:
+手动安装可选两种方式：
 
-**Method 1: User Configuration (Recommended)**
-Add the configuration to your user-level MCP configuration file. Open the Command Palette (`Ctrl + Shift + P`) and run `MCP: Open User Configuration`. This will open your user `mcp.json` file where you can add the server configuration.
+**方法 1：用户级配置（推荐）**  
+通过命令面板（`Ctrl + Shift + P`）运行 `MCP: Open User Configuration`，在用户 `mcp.json` 中添加。
 
-**Method 2: Workspace Configuration**
-Alternatively, you can add the configuration to a file called `.vscode/mcp.json` in your workspace. This will allow you to share the configuration with others.
+**方法 2：工作区配置**  
+在工作区创建 `.vscode/mcp.json` 并添加配置。
 
-> For more details about MCP configuration in VS Code, see the [official VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers).
+> 更多细节请参考 [VS Code MCP 官方文档](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)。
 
 #### NPX
 
@@ -236,13 +245,13 @@ Alternatively, you can add the configuration to a file called `.vscode/mcp.json`
 }
 ```
 
-### System Prompt
+### System Prompt（示例）
 
-The prompt for utilizing memory depends on the use case. Changing the prompt will help the model determine the frequency and types of memories created.
+如何使用 memory，很大程度取决于你的提示词。调整提示词可以帮助模型决定记忆的频率和类型。
 
-Here is an example prompt for chat personalization. You could use this prompt in the "Custom Instructions" field of a [Claude.ai Project](https://www.anthropic.com/news/projects). 
+下面是一个用于聊天个性化的示例提示词，可放到 [Claude.ai Project](https://www.anthropic.com/news/projects) 的 “Custom Instructions”：
 
-```
+```text
 Follow these steps for each interaction:
 
 1. User Identification:
@@ -268,16 +277,16 @@ Follow these steps for each interaction:
      c) Store facts about them as observations
 ```
 
-## Building
+## 构建
 
-Docker:
+Docker：
 
 ```sh
-docker build -t mcp/memory -f src/memory/Dockerfile . 
+docker build -t mcp/memory -f src/memory/Dockerfile .
 ```
 
-For Awareness: a prior mcp/memory volume contains an index.js file that could be overwritten by the new container. If you are using a docker volume for storage, delete the old docker volume's `index.js` file before starting the new container.
+注意：旧版 `mcp/memory` Docker volume 可能包含 `index.js`，新容器会覆盖该文件。如果你使用 volume 持久化，请在启动新容器前删除旧 volume 中的 `index.js`。
 
-## License
+## 许可证
 
-This MCP server is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
+本 MCP 服务器使用 MIT 许可证。你可以在遵守 MIT 条款的前提下自由使用、修改和分发本软件。详情见项目仓库中的 LICENSE 文件。

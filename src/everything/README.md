@@ -1,21 +1,20 @@
 # Everything MCP Server
-**[Architecture](docs/architecture.md)
-| [Project Structure](docs/structure.md)
-| [Startup Process](docs/startup.md)
-| [Server Features](docs/features.md)
-| [Extension Points](docs/extension.md)
-| [How It Works](docs/how-it-works.md)**
+**[架构](docs/architecture.md)
+| [项目结构](docs/structure.md)
+| [启动流程](docs/startup.md)
+| [服务特性](docs/features.md)
+| [扩展点](docs/extension.md)
+| [工作机制](docs/how-it-works.md)**
 
+该 MCP 服务器旨在覆盖 MCP 协议的几乎全部特性。它并非面向实际业务价值的服务器，而是为 MCP 客户端开发者提供的测试服务器。它实现了 prompts、tools、resources、sampling 等能力，用于展示 MCP 的能力边界。
 
-This MCP server attempts to exercise all the features of the MCP protocol. It is not intended to be a useful server, but rather a test server for builders of MCP clients. It implements prompts, tools, resources, sampling, and more to showcase MCP capabilities.
+## Tools、Resources、Prompts 与其他特性
 
-## Tools, Resources, Prompts, and Other Features
+已注册的 MCP 原语与其他协议特性的完整列表见 [服务特性](docs/features.md)。
 
-A complete list of the registered MCP primitives and other protocol features demonstrated can be found in the [Server Features](docs/features.md) document.
+## 在 Claude Desktop 中使用（使用 [stdio 传输](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio)）
 
-## Usage with Claude Desktop (uses [stdio Transport](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio))
-
-Add to your `claude_desktop_config.json`:
+将以下内容添加到 `claude_desktop_config.json`：
 
 ```json
 {
@@ -31,23 +30,23 @@ Add to your `claude_desktop_config.json`:
 }
 ```
 
-## Usage with VS Code
+## 在 VS Code 中使用
 
-For quick installation, use of of the one-click install buttons below...
+可使用以下一键安装按钮：
 
 [![Install with NPX in VS Code](https://img.shields.io/badge/VS_Code-NPM-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=everything&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40modelcontextprotocol%2Fserver-everything%22%5D%7D) [![Install with NPX in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-NPM-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=everything&config=%7B%22command%22%3A%22npx%22%2C%22args%22%3A%5B%22-y%22%2C%22%40modelcontextprotocol%2Fserver-everything%22%5D%7D&quality=insiders)
 
 [![Install with Docker in VS Code](https://img.shields.io/badge/VS_Code-Docker-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=everything&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22mcp%2Feverything%22%5D%7D) [![Install with Docker in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Docker-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=everything&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22mcp%2Feverything%22%5D%7D&quality=insiders)
 
-For manual installation, you can configure the MCP server using one of these methods:
+手动安装可选两种方式：
 
-**Method 1: User Configuration (Recommended)**
-Add the configuration to your user-level MCP configuration file. Open the Command Palette (`Ctrl + Shift + P`) and run `MCP: Open User Configuration`. This will open your user `mcp.json` file where you can add the server configuration.
+**方式 1：用户级配置（推荐）**  
+在命令面板（`Ctrl + Shift + P`）执行 `MCP: Open User Configuration`，编辑用户 `mcp.json`。
 
-**Method 2: Workspace Configuration**
-Alternatively, you can add the configuration to a file called `.vscode/mcp.json` in your workspace. This will allow you to share the configuration with others.
+**方式 2：工作区配置**  
+在工作区添加 `.vscode/mcp.json`，方便共享。
 
-> For more details about MCP configuration in VS Code, see the [official VS Code MCP documentation](https://code.visualstudio.com/docs/copilot/customization/mcp-servers).
+> 更多信息见 [VS Code MCP 官方文档](https://code.visualstudio.com/docs/copilot/customization/mcp-servers)。
 
 #### NPX
 
@@ -62,7 +61,7 @@ Alternatively, you can add the configuration to a file called `.vscode/mcp.json`
 }
 ```
 
-## Running from source with [HTTP+SSE Transport](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse) (deprecated as of [2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports))
+## 从源码运行（[HTTP+SSE 传输](https://modelcontextprotocol.io/specification/2024-11-05/basic/transports#http-with-sse)，已在 [2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports) 标记废弃）
 
 ```shell
 cd src/everything
@@ -70,7 +69,7 @@ npm install
 npm run start:sse
 ```
 
-## Run from source with [Streamable HTTP Transport](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http)
+## 从源码运行（[Streamable HTTP 传输](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http)）
 
 ```shell
 cd src/everything
@@ -78,29 +77,34 @@ npm install
 npm run start:streamableHttp
 ```
 
-## Running as an installed package
-### Install 
+## 作为已安装包运行
+
+### 安装
+
 ```shell
 npm install -g @modelcontextprotocol/server-everything@latest
-````
+```
 
-### Run the default (stdio) server
+### 运行默认（stdio）服务
+
 ```shell
 npx @modelcontextprotocol/server-everything
 ```
 
-### Or specify stdio explicitly
+### 或显式指定 stdio
+
 ```shell
 npx @modelcontextprotocol/server-everything stdio
 ```
 
-### Run the SSE server
+### 运行 SSE 服务
+
 ```shell
 npx @modelcontextprotocol/server-everything sse
 ```
 
-### Run the streamable HTTP server
+### 运行 streamable HTTP 服务
+
 ```shell
 npx @modelcontextprotocol/server-everything streamableHttp
 ```
-

@@ -1,44 +1,43 @@
-# Everything Server – Architecture
+# Everything Server - 架构
 
-**Architecture
-| [Project Structure](structure.md)
-| [Startup Process](startup.md)
-| [Server Features](features.md)
-| [Extension Points](extension.md)
-| [How It Works](how-it-works.md)**
+**架构
+| [项目结构](structure.md)
+| [启动流程](startup.md)
+| [服务特性](features.md)
+| [扩展点](extension.md)
+| [工作机制](how-it-works.md)**
 
-This documentation summarizes the current layout and runtime architecture of the `src/everything` package.
-It explains how the server starts, how transports are wired, where tools, prompts, and resources are registered, and how to extend the system.
+本文档概述了 `src/everything` 包当前的布局与运行时架构。
+它说明了服务如何启动、传输层如何接线、tools/prompts/resources 在哪里注册，以及如何扩展系统。
 
-## High‑level Overview
+## 高层概览
 
-### Purpose
+### 目标
 
-A minimal, modular MCP server showcasing core Model Context Protocol features. It exposes simple tools, prompts, and resources, and can be run over multiple transports (STDIO, SSE, and Streamable HTTP).
+一个最小、模块化的 MCP 服务器，用于展示 Model Context Protocol 的核心能力。它暴露基础工具、提示词和资源，并支持多种传输（STDIO、SSE、Streamable HTTP）。
 
-### Design
+### 设计
 
-A small “server factory” constructs the MCP server and registers features.
-Transports are separate entry points that create/connect the server and handle network concerns.
-Tools, prompts, and resources are organized in their own submodules.
+使用小型“server factory”来构建 MCP 服务并注册能力。
+传输层作为独立入口，负责创建/连接服务以及网络通信。
+tools、prompts、resources 分别按子模块组织。
 
-### Multi‑client
+### 多客户端
 
-The server supports multiple concurrent clients. Tracking per session data is demonstrated with
-resource subscriptions and simulated logging.
+服务器支持多个并发客户端。通过资源订阅与模拟日志，演示按 session 维度跟踪数据。
 
-## Build and Distribution
+## 构建与分发
 
-- TypeScript sources are compiled into `dist/` via `npm run build`.
-- The `build` script copies `docs/` into `dist/` so instruction files ship alongside the compiled server.
-- The CLI bin is configured in `package.json` as `mcp-server-everything` → `dist/index.js`.
+- TypeScript 源码通过 `npm run build` 编译到 `dist/`
+- `build` 脚本会把 `docs/` 复制到 `dist/`，让说明文档随编译产物一起发布
+- CLI 可执行入口在 `package.json` 中配置为 `mcp-server-everything` → `dist/index.js`
 
-## [Project Structure](structure.md)
+## [项目结构](structure.md)
 
-## [Startup Process](startup.md)
+## [启动流程](startup.md)
 
-## [Server Features](features.md)
+## [服务特性](features.md)
 
-## [Extension Points](extension.md)
+## [扩展点](extension.md)
 
-## [How It Works](how-it-works.md)
+## [工作机制](how-it-works.md)

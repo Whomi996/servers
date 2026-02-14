@@ -2,53 +2,52 @@
 
 <!-- mcp-name: io.github.modelcontextprotocol/server-time -->
 
-A Model Context Protocol server that provides time and timezone conversion capabilities. This server enables LLMs to get current time information and perform timezone conversions using IANA timezone names, with automatic system timezone detection.
+一个提供时间与时区转换能力的 Model Context Protocol 服务器。该服务器让 LLM 可以获取当前时间，并使用 IANA 时区名称进行时区转换，同时支持自动检测系统时区。
 
-### Available Tools
+### 可用工具
 
-- `get_current_time` - Get current time in a specific timezone or system timezone.
-  - Required arguments:
-    - `timezone` (string): IANA timezone name (e.g., 'America/New_York', 'Europe/London')
+- `get_current_time` - 获取指定时区（或系统时区）的当前时间。
+  - 必填参数：
+    - `timezone`（string）：IANA 时区名（例如 `America/New_York`、`Europe/London`）
 
-- `convert_time` - Convert time between timezones.
-  - Required arguments:
-    - `source_timezone` (string): Source IANA timezone name
-    - `time` (string): Time in 24-hour format (HH:MM)
-    - `target_timezone` (string): Target IANA timezone name
+- `convert_time` - 在两个时区之间进行时间转换。
+  - 必填参数：
+    - `source_timezone`（string）：源 IANA 时区名
+    - `time`（string）：24 小时制时间（`HH:MM`）
+    - `target_timezone`（string）：目标 IANA 时区名
 
-## Installation
+## 安装
 
-### Using uv (recommended)
+### 使用 uv（推荐）
 
-When using [`uv`](https://docs.astral.sh/uv/) no specific installation is needed. We will
-use [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run *mcp-server-time*.
+使用 [`uv`](https://docs.astral.sh/uv/) 时通常无需额外安装。我们直接用 [`uvx`](https://docs.astral.sh/uv/guides/tools/) 运行 *mcp-server-time*。
 
 ```bash
 uvx mcp-server-time
 ```
 
-### Using PIP
+### 使用 PIP
 
-Alternatively you can install `mcp-server-time` via pip:
+也可以通过 pip 安装 `mcp-server-time`：
 
 ```bash
 pip install mcp-server-time
 ```
 
-After installation, you can run it as a script using:
+安装后可通过以下方式启动：
 
 ```bash
 python -m mcp_server_time
 ```
 
-## Configuration
+## 配置
 
-### Configure for Claude.app
+### 配置 Claude.app
 
-Add to your Claude settings:
+将以下内容添加到 Claude 配置中：
 
 <details>
-<summary>Using uvx</summary>
+<summary>使用 uvx</summary>
 
 ```json
 {
@@ -63,7 +62,7 @@ Add to your Claude settings:
 </details>
 
 <details>
-<summary>Using docker</summary>
+<summary>使用 docker</summary>
 
 ```json
 {
@@ -78,7 +77,7 @@ Add to your Claude settings:
 </details>
 
 <details>
-<summary>Using pip installation</summary>
+<summary>使用 pip 安装版本</summary>
 
 ```json
 {
@@ -92,12 +91,12 @@ Add to your Claude settings:
 ```
 </details>
 
-### Configure for Zed
+### 配置 Zed
 
-Add to your Zed settings.json:
+将以下内容添加到 Zed 的 `settings.json`：
 
 <details>
-<summary>Using uvx</summary>
+<summary>使用 uvx</summary>
 
 ```json
 "context_servers": [
@@ -110,7 +109,7 @@ Add to your Zed settings.json:
 </details>
 
 <details>
-<summary>Using pip installation</summary>
+<summary>使用 pip 安装版本</summary>
 
 ```json
 "context_servers": {
@@ -122,22 +121,22 @@ Add to your Zed settings.json:
 ```
 </details>
 
-### Configure for VS Code
+### 配置 VS Code
 
-For quick installation, use one of the one-click install buttons below...
+快速安装可使用以下一键安装按钮：
 
 [![Install with UV in VS Code](https://img.shields.io/badge/VS_Code-UV-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=time&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-time%22%5D%7D) [![Install with UV in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-UV-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=time&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-time%22%5D%7D&quality=insiders)
 
 [![Install with Docker in VS Code](https://img.shields.io/badge/VS_Code-Docker-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=time&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22mcp%2Ftime%22%5D%7D) [![Install with Docker in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Docker-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=time&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22mcp%2Ftime%22%5D%7D&quality=insiders)
 
-For manual installation, add the following JSON block to your User Settings (JSON) file in VS Code. You can do this by pressing `Ctrl + Shift + P` and typing `Preferences: Open User Settings (JSON)`.
+手动安装时，将以下 JSON 添加到 VS Code 的用户设置 JSON（`Ctrl + Shift + P` 后执行 `Preferences: Open User Settings (JSON)`）。
 
-Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace. This will allow you to share the configuration with others.
+也可以放到工作区的 `.vscode/mcp.json` 中，以便共享给团队。
 
-> Note that the `mcp` key is needed when using the `mcp.json` file.
+> 使用 `mcp.json` 文件时需要包含 `mcp` 顶层键。
 
 <details>
-<summary>Using uvx</summary>
+<summary>使用 uvx</summary>
 
 ```json
 {
@@ -154,7 +153,7 @@ Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace
 </details>
 
 <details>
-<summary>Using Docker</summary>
+<summary>使用 Docker</summary>
 
 ```json
 {
@@ -170,29 +169,30 @@ Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace
 ```
 </details>
 
-### Configure for Zencoder
+### 配置 Zencoder
 
-1. Go to the Zencoder menu (...)
-2. From the dropdown menu, select `Agent Tools`
-3. Click on the `Add Custom MCP`
-4. Add the name and server configuration from below, and make sure to hit the `Install` button
+1. 打开 Zencoder 菜单（...）
+2. 下拉中选择 `Agent Tools`
+3. 点击 `Add Custom MCP`
+4. 按下方配置填入名称与服务配置，并点击 `Install`
 
 <details>
-<summary>Using uvx</summary>
+<summary>使用 uvx</summary>
 
 ```json
 {
-    "command": "uvx",
-    "args": ["mcp-server-time"]
-  }
+  "command": "uvx",
+  "args": ["mcp-server-time"]
+}
 ```
 </details>
 
-### Customization - System Timezone
+### 自定义 - 系统时区
 
-By default, the server automatically detects your system's timezone. You can override this by adding the argument `--local-timezone` to the `args` list in the configuration.
+默认情况下服务器会自动检测系统时区。你可以在配置 `args` 中添加 `--local-timezone` 覆盖该行为。
 
-Example:
+示例：
+
 ```json
 {
   "command": "python",
@@ -200,9 +200,10 @@ Example:
 }
 ```
 
-## Example Interactions
+## 交互示例
 
-1. Get current time:
+1. 获取当前时间：
+
 ```json
 {
   "name": "get_current_time",
@@ -211,7 +212,9 @@ Example:
   }
 }
 ```
-Response:
+
+返回：
+
 ```json
 {
   "timezone": "Europe/Warsaw",
@@ -220,7 +223,8 @@ Response:
 }
 ```
 
-2. Convert time between timezones:
+2. 时区转换：
+
 ```json
 {
   "name": "convert_time",
@@ -231,7 +235,9 @@ Response:
   }
 }
 ```
-Response:
+
+返回：
+
 ```json
 {
   "source": {
@@ -244,50 +250,50 @@ Response:
     "datetime": "2024-01-01T12:30:00+09:00",
     "is_dst": false
   },
-  "time_difference": "+13.0h",
+  "time_difference": "+13.0h"
 }
 ```
 
-## Debugging
+## 调试
 
-You can use the MCP inspector to debug the server. For uvx installations:
+可以使用 MCP inspector 调试服务。uvx 安装时：
 
 ```bash
 npx @modelcontextprotocol/inspector uvx mcp-server-time
 ```
 
-Or if you've installed the package in a specific directory or are developing on it:
+如果你在本地开发或在指定目录安装了包：
 
 ```bash
 cd path/to/servers/src/time
 npx @modelcontextprotocol/inspector uv run mcp-server-time
 ```
 
-## Examples of Questions for Claude
+## 可向 Claude 提问的示例
 
-1. "What time is it now?" (will use system timezone)
-2. "What time is it in Tokyo?"
-3. "When it's 4 PM in New York, what time is it in London?"
-4. "Convert 9:30 AM Tokyo time to New York time"
+1. “现在几点了？”（使用系统时区）
+2. “东京现在几点？”
+3. “纽约下午 4 点时，伦敦是几点？”
+4. “把东京上午 9:30 换算成纽约时间”
 
-## Build
+## 构建
 
-Docker build:
+Docker 构建：
 
 ```bash
 cd src/time
 docker build -t mcp/time .
 ```
 
-## Contributing
+## 贡献
 
-We encourage contributions to help expand and improve mcp-server-time. Whether you want to add new time-related tools, enhance existing functionality, or improve documentation, your input is valuable.
+欢迎贡献以扩展和改进 mcp-server-time。无论是新增时间相关工具、增强现有功能还是改进文档，都非常有价值。
 
-For examples of other MCP servers and implementation patterns, see:
+可参考其他 MCP 服务器实现模式：
 https://github.com/modelcontextprotocol/servers
 
-Pull requests are welcome! Feel free to contribute new ideas, bug fixes, or enhancements to make mcp-server-time even more powerful and useful.
+欢迎提交 PR。
 
-## License
+## 许可证
 
-mcp-server-time is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
+mcp-server-time 使用 MIT 许可证。你可以在遵守 MIT 条款的前提下自由使用、修改和分发本软件。详情见仓库中的 LICENSE 文件。

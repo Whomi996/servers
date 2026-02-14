@@ -1,45 +1,55 @@
-# Everything Server - How It Works
+# Everything Server - 工作机制
 
-**[Architecture](architecture.md)
-| [Project Structure](structure.md)
-| [Startup Process](startup.md)
-| [Server Features](features.md)
-| [Extension Points](extension.md)
-| How It Works**
+**[架构](architecture.md)
+| [项目结构](structure.md)
+| [启动流程](startup.md)
+| [服务特性](features.md)
+| [扩展点](extension.md)
+| 工作机制**
 
-# Conditional Tool Registration
+# 条件化工具注册
 
-### Module: `server/index.ts`
+### 模块：`server/index.ts`
 
-- Some tools require client support for the capability they demonstrate. These are:
+- 某些工具依赖客户端能力，只有客户端支持时才应注册：
   - `get-roots-list`
   - `trigger-elicitation-request`
   - `trigger-sampling-request`
-- Client capabilities aren't known until after initilization handshake is complete.
-- Most tools are registered immediately during the Server Factory execution, prior to client connection.
-- To defer registration of these commands until client capabilities are known, a `registerConditionalTools(server)` function is invoked from an `onintitialized` handler.
+- 客户端能力只有在初始化握手完成后才可确定。
+- 大多数工具会在 Server Factory 执行阶段（客户端连接前）立即注册。
+- 这些条件工具会延迟到 `oninitialized` 回调中，通过 `registerConditionalTools(server)` 注册。
 
-## Resource Subscriptions
+## 资源订阅
 
-### Module: `resources/subscriptions.ts`
+### 模块：`resources/subscriptions.ts`
 
-- Tracks subscribers per URI: `Map<uri, Set<sessionId>>`.
-- Installs handlers via `setSubscriptionHandlers(server)` to process subscribe/unsubscribe requests and keep the map updated.
-- Updates are started/stopped on demand by the `toggle-subscriber-updates` tool, which calls `beginSimulatedResourceUpdates(server, sessionId)` and `stopSimulatedResourceUpdates(sessionId)`.
-- `cleanup(sessionId?)` calls `stopSimulatedResourceUpdates(sessionId)` to clear intervals and remove session‑scoped state.
+- 按 URI 追踪订阅者：`Map<uri, Set<sessionId>>`
+- 通过 `setSubscriptionHandlers(server)` 安装订阅/取消订阅处理器并维护映射
+- `toggle-subscriber-updates` 工具按需启停更新：
+  - 启动：`beginSimulatedResourceUpdates(server, sessionId)`
+  - 停止：`stopSimulatedResourceUpdates(sessionId)`
+- `cleanup(sessionId?)` 会调用 `stopSimulatedResourceUpdates(sessionId)`，清理定时器与会话态数据
 
-## Session‑scoped Resources
+## 会话级资源（Session-scoped Resources）
 
-### Module: `resources/session.ts`
+### 模块：`resources/session.ts`
 
-- `getSessionResourceURI(name: string)`: Builds a session resource URI: `demo://resource/session/<name>`.
-- `registerSessionResource(server, resource, type, payload)`: Registers a resource with the given `uri`, `name`, and `mimeType`, returning a `resource_link`. The content is served from memory for the life of the session only. Supports `type: "text" | "blob"` and returns data in the corresponding field.
-- Intended usage: tools can create and expose per-session artifacts without persisting them. For example, `tools/gzip-file-as-resource.ts` compresses fetched content, registers it as a session resource with `mimeType: application/gzip`, and returns either a `resource_link` or an inline `resource` based on `outputType`.
+- `getSessionResourceURI(name: string)`：构建 URI：`demo://resource/session/<name>`
+- `registerSessionResource(server, resource, type, payload)`：
+  - 以给定 `uri`、`name`、`mimeType` 注册资源
+  - 返回 `resource_link`
+  - 内容仅驻留内存，在当前会话生命周期内可用
+  - 支持 `type: "text" | "blob"`，并在对应字段返回数据
+- 典型用法：工具在不落盘的情况下创建会话内产物
+  - 例如 `tools/gzip-file-as-resource.ts` 会压缩抓取内容，注册为 `mimeType: application/gzip` 的会话资源，并按 `outputType` 返回 `resource_link` 或内联 `resource`
 
-## Simulated Logging
+## 模拟日志
 
-### Module: `server/logging.ts`
+### 模块：`server/logging.ts`
 
-- Periodically sends randomized log messages at different levels. Messages can include the session ID for clarity during demos.
-- Started/stopped on demand via the `toggle-simulated-logging` tool, which calls `beginSimulatedLogging(server, sessionId?)` and `stopSimulatedLogging(sessionId?)`. Note that transport disconnect triggers `cleanup()` which also stops any active intervals.
-- Uses `server.sendLoggingMessage({ level, data }, sessionId?)` so that the client’s configured minimum logging level is respected by the SDK.
+- 周期性发送不同级别的随机日志；可包含 session ID，便于演示定位
+- 通过 `toggle-simulated-logging` 工具按需启停：
+  - 启动：`beginSimulatedLogging(server, sessionId?)`
+  - 停止：`stopSimulatedLogging(sessionId?)`
+  - 连接断开时 `cleanup()` 也会停止相关定时任务
+- 使用 `server.sendLoggingMessage({ level, data }, sessionId?)` 发送日志，从而遵循客户端通过 SDK 设置的最小日志级别

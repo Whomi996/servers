@@ -2,59 +2,58 @@
 
 <!-- mcp-name: io.github.modelcontextprotocol/server-fetch -->
 
-A Model Context Protocol server that provides web content fetching capabilities. This server enables LLMs to retrieve and process content from web pages, converting HTML to markdown for easier consumption.
+一个提供网页内容抓取能力的 Model Context Protocol 服务器。它可以让 LLM 抓取网页并处理内容，将 HTML 转换为更易消费的 Markdown。
 
 > [!CAUTION]
-> This server can access local/internal IP addresses and may represent a security risk. Exercise caution when using this MCP server to ensure this does not expose any sensitive data.
+> 此服务器可以访问本地/内网 IP 地址，可能带来安全风险。使用时请谨慎，避免泄露敏感数据。
 
-The fetch tool will truncate the response, but by using the `start_index` argument, you can specify where to start the content extraction. This lets models read a webpage in chunks, until they find the information they need.
+`fetch` 工具会截断返回内容。你可以通过 `start_index` 指定从哪个字符位置开始提取，从而让模型按分块方式读取网页，直到定位到需要的信息。
 
-### Available Tools
+### 可用工具
 
-- `fetch` - Fetches a URL from the internet and extracts its contents as markdown.
-    - `url` (string, required): URL to fetch
-    - `max_length` (integer, optional): Maximum number of characters to return (default: 5000)
-    - `start_index` (integer, optional): Start content from this character index (default: 0)
-    - `raw` (boolean, optional): Get raw content without markdown conversion (default: false)
+- `fetch` - 从互联网抓取 URL，并将内容提取为 Markdown。
+  - `url`（string，必填）：目标 URL
+  - `max_length`（integer，可选）：最大返回字符数（默认 `5000`）
+  - `start_index`（integer，可选）：从该字符索引开始返回（默认 `0`）
+  - `raw`（boolean，可选）：返回原始内容，不做 Markdown 转换（默认 `false`）
 
 ### Prompts
 
 - **fetch**
-  - Fetch a URL and extract its contents as markdown
-  - Arguments:
-    - `url` (string, required): URL to fetch
+  - 抓取 URL 并提取为 Markdown
+  - 参数：
+    - `url`（string，必填）：目标 URL
 
-## Installation
+## 安装
 
-Optionally: Install node.js, this will cause the fetch server to use a different HTML simplifier that is more robust.
+可选：安装 Node.js。安装后 fetch server 会使用更稳健的 HTML 简化器。
 
-### Using uv (recommended)
+### 使用 uv（推荐）
 
-When using [`uv`](https://docs.astral.sh/uv/) no specific installation is needed. We will
-use [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run *mcp-server-fetch*.
+使用 [`uv`](https://docs.astral.sh/uv/) 时通常无需额外安装，直接通过 [`uvx`](https://docs.astral.sh/uv/guides/tools/) 运行 *mcp-server-fetch*。
 
-### Using PIP
+### 使用 PIP
 
-Alternatively you can install `mcp-server-fetch` via pip:
+也可以通过 pip 安装 `mcp-server-fetch`：
 
-```
+```bash
 pip install mcp-server-fetch
 ```
 
-After installation, you can run it as a script using:
+安装后可运行：
 
-```
+```bash
 python -m mcp_server_fetch
 ```
 
-## Configuration
+## 配置
 
-### Configure for Claude.app
+### 配置 Claude.app
 
-Add to your Claude settings:
+将以下内容添加到 Claude 配置：
 
 <details>
-<summary>Using uvx</summary>
+<summary>使用 uvx</summary>
 
 ```json
 {
@@ -69,7 +68,7 @@ Add to your Claude settings:
 </details>
 
 <details>
-<summary>Using docker</summary>
+<summary>使用 docker</summary>
 
 ```json
 {
@@ -84,7 +83,7 @@ Add to your Claude settings:
 </details>
 
 <details>
-<summary>Using pip installation</summary>
+<summary>使用 pip 安装版本</summary>
 
 ```json
 {
@@ -98,22 +97,22 @@ Add to your Claude settings:
 ```
 </details>
 
-### Configure for VS Code
+### 配置 VS Code
 
-For quick installation, use one of the one-click install buttons below...
+快速安装可使用以下按钮：
 
 [![Install with UV in VS Code](https://img.shields.io/badge/VS_Code-UV-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fetch&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-fetch%22%5D%7D) [![Install with UV in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-UV-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fetch&config=%7B%22command%22%3A%22uvx%22%2C%22args%22%3A%5B%22mcp-server-fetch%22%5D%7D&quality=insiders)
 
 [![Install with Docker in VS Code](https://img.shields.io/badge/VS_Code-Docker-0098FF?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fetch&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22mcp%2Ffetch%22%5D%7D) [![Install with Docker in VS Code Insiders](https://img.shields.io/badge/VS_Code_Insiders-Docker-24bfa5?style=flat-square&logo=visualstudiocode&logoColor=white)](https://insiders.vscode.dev/redirect/mcp/install?name=fetch&config=%7B%22command%22%3A%22docker%22%2C%22args%22%3A%5B%22run%22%2C%22-i%22%2C%22--rm%22%2C%22mcp%2Ffetch%22%5D%7D&quality=insiders)
 
-For manual installation, add the following JSON block to your User Settings (JSON) file in VS Code. You can do this by pressing `Ctrl + Shift + P` and typing `Preferences: Open User Settings (JSON)`.
+手动安装时，将对应 JSON 添加到 VS Code 用户设置 JSON（`Ctrl + Shift + P`，执行 `Preferences: Open User Settings (JSON)`）。
 
-Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace. This will allow you to share the configuration with others.
+也可以写到工作区 `.vscode/mcp.json` 以便共享。
 
-> Note that the `mcp` key is needed when using the `mcp.json` file.
+> 使用 `mcp.json` 时需要包含 `mcp` 顶层键。
 
 <details>
-<summary>Using uvx</summary>
+<summary>使用 uvx</summary>
 
 ```json
 {
@@ -130,7 +129,7 @@ Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace
 </details>
 
 <details>
-<summary>Using Docker</summary>
+<summary>使用 Docker</summary>
 
 ```json
 {
@@ -146,36 +145,37 @@ Optionally, you can add it to a file called `.vscode/mcp.json` in your workspace
 ```
 </details>
 
-### Customization - robots.txt
+### 自定义 - robots.txt
 
-By default, the server will obey a websites robots.txt file if the request came from the model (via a tool), but not if
-the request was user initiated (via a prompt). This can be disabled by adding the argument `--ignore-robots-txt` to the
-`args` list in the configuration.
+默认情况下：若请求由模型通过工具发起，服务器会遵守目标站点的 `robots.txt`；若请求由用户通过 prompt 发起，则不受该限制。  
+可在配置 `args` 中添加 `--ignore-robots-txt` 关闭此行为。
 
-### Customization - User-agent
+### 自定义 - User-Agent
 
-By default, depending on if the request came from the model (via a tool), or was user initiated (via a prompt), the
-server will use either the user-agent
-```
+根据请求来源不同（模型工具调用 vs 用户主动请求），默认使用以下 User-Agent 之一：
+
+```text
 ModelContextProtocol/1.0 (Autonomous; +https://github.com/modelcontextprotocol/servers)
 ```
-or
-```
+
+或
+
+```text
 ModelContextProtocol/1.0 (User-Specified; +https://github.com/modelcontextprotocol/servers)
 ```
 
-This can be customized by adding the argument `--user-agent=YourUserAgent` to the `args` list in the configuration.
+可通过在 `args` 中添加 `--user-agent=YourUserAgent` 覆盖。
 
-### Customization - Proxy
+### 自定义 - 代理
 
-The server can be configured to use a proxy by using the `--proxy-url` argument.
+可使用 `--proxy-url` 参数配置代理。
 
-## Windows Configuration
+## Windows 配置
 
-If you're experiencing timeout issues on Windows, you may need to set the `PYTHONIOENCODING` environment variable to ensure proper character encoding:
+如果你在 Windows 上遇到超时问题，可能需要设置 `PYTHONIOENCODING` 环境变量以确保字符编码正常：
 
 <details>
-<summary>Windows configuration (uvx)</summary>
+<summary>Windows 配置（uvx）</summary>
 
 ```json
 {
@@ -193,7 +193,7 @@ If you're experiencing timeout issues on Windows, you may need to set the `PYTHO
 </details>
 
 <details>
-<summary>Windows configuration (pip)</summary>
+<summary>Windows 配置（pip）</summary>
 
 ```json
 {
@@ -210,32 +210,32 @@ If you're experiencing timeout issues on Windows, you may need to set the `PYTHO
 ```
 </details>
 
-This addresses character encoding issues that can cause the server to timeout on Windows systems.
+该设置可避免字符编码问题导致的超时。
 
-## Debugging
+## 调试
 
-You can use the MCP inspector to debug the server. For uvx installations:
+可以使用 MCP inspector 调试。uvx 场景：
 
-```
+```bash
 npx @modelcontextprotocol/inspector uvx mcp-server-fetch
 ```
 
-Or if you've installed the package in a specific directory or are developing on it:
+若在本地开发或指定目录安装：
 
-```
+```bash
 cd path/to/servers/src/fetch
 npx @modelcontextprotocol/inspector uv run mcp-server-fetch
 ```
 
-## Contributing
+## 贡献
 
-We encourage contributions to help expand and improve mcp-server-fetch. Whether you want to add new tools, enhance existing functionality, or improve documentation, your input is valuable.
+欢迎贡献以扩展和改进 mcp-server-fetch。你可以新增工具、增强现有功能或改进文档。
 
-For examples of other MCP servers and implementation patterns, see:
+可参考其他 MCP 服务器实现：
 https://github.com/modelcontextprotocol/servers
 
-Pull requests are welcome! Feel free to contribute new ideas, bug fixes, or enhancements to make mcp-server-fetch even more powerful and useful.
+欢迎提交 PR。
 
-## License
+## 许可证
 
-mcp-server-fetch is licensed under the MIT License. This means you are free to use, modify, and distribute the software, subject to the terms and conditions of the MIT License. For more details, please see the LICENSE file in the project repository.
+mcp-server-fetch 使用 MIT 许可证。你可以在遵守 MIT 条款的前提下自由使用、修改和分发软件。详见项目仓库中的 LICENSE。

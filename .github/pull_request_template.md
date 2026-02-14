@@ -1,44 +1,44 @@
-<!-- Provide a brief description of your changes -->
+<!-- 请简要说明你的改动内容 -->
 
-## Description
+## 描述
 
-## Publishing Your Server
+## 发布你的服务器
 
-**Note: We are no longer accepting PRs to add servers to the README.** Instead, please publish your server to the [MCP Server Registry](https://github.com/modelcontextprotocol/registry) to make it discoverable to the MCP ecosystem.
+**注意：我们不再接受通过 PR 将服务器添加到 README。** 请改为将你的服务器发布到 [MCP Server Registry](https://github.com/modelcontextprotocol/registry)，以便在 MCP 生态中被发现。
 
-To publish your server, follow the [quickstart guide](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx). You can browse published servers at [https://registry.modelcontextprotocol.io/](https://registry.modelcontextprotocol.io/).
+发布方式请参考 [快速开始指南](https://github.com/modelcontextprotocol/registry/blob/main/docs/modelcontextprotocol-io/quickstart.mdx)。你也可以在这里浏览已发布服务器：[https://registry.modelcontextprotocol.io/](https://registry.modelcontextprotocol.io/)。
 
-## Server Details
-<!-- If modifying an existing server, provide details -->
-- Server: <!-- e.g., filesystem, github -->
-- Changes to: <!-- e.g., tools, resources, prompts -->
+## 服务器细节
+<!-- 如果你在修改已有服务器，请提供细节 -->
+- Server: <!-- 例如：filesystem、github -->
+- Changes to: <!-- 例如：tools、resources、prompts -->
 
-## Motivation and Context
-<!-- Why is this change needed? What problem does it solve? -->
+## 动机与背景
+<!-- 为什么需要这个改动？它解决了什么问题？ -->
 
-## How Has This Been Tested?
-<!-- Have you tested this with an LLM client? Which scenarios were tested? -->
+## 如何测试
+<!-- 你是否已在 LLM 客户端中测试？测试了哪些场景？ -->
 
-## Breaking Changes
-<!-- Will users need to update their MCP client configurations? -->
+## 破坏性变更
+<!-- 用户是否需要更新其 MCP 客户端配置？ -->
 
-## Types of changes
-<!-- What types of changes does your code introduce? Put an `x` in all the boxes that apply: -->
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
-- [ ] Documentation update
+## 变更类型
+<!-- 你的代码属于哪些类型改动？请在适用项中打 `x` -->
+- [ ] Bug 修复（不破坏兼容性、修复问题）
+- [ ] 新功能（不破坏兼容性、增加功能）
+- [ ] 破坏性变更（会导致现有功能行为变化）
+- [ ] 文档更新
 
-## Checklist
-<!-- Go over all the following points, and put an `x` in all the boxes that apply. -->
-- [ ] I have read the [MCP Protocol Documentation](https://modelcontextprotocol.io)
-- [ ] My changes follows MCP security best practices
-- [ ] I have updated the server's README accordingly
-- [ ] I have tested this with an LLM client
-- [ ] My code follows the repository's style guidelines
-- [ ] New and existing tests pass locally
-- [ ] I have added appropriate error handling
-- [ ] I have documented all environment variables and configuration options
+## 检查清单
+<!-- 请核对以下条目，并在适用项中打 `x` -->
+- [ ] 我已阅读 [MCP 协议文档](https://modelcontextprotocol.io)
+- [ ] 我的改动遵循 MCP 安全最佳实践
+- [ ] 我已同步更新对应服务器的 README
+- [ ] 我已在 LLM 客户端中测试
+- [ ] 我的代码符合仓库风格规范
+- [ ] 新增与现有测试都已在本地通过
+- [ ] 我已添加适当的错误处理
+- [ ] 我已记录所有环境变量与配置项
 
-## Additional context
-<!-- Add any other context, implementation notes, or design decisions -->
+## 其他上下文
+<!-- 其他上下文、实现说明或设计决策 -->
