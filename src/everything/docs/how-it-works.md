@@ -12,9 +12,9 @@
 ### 模块：`server/index.ts`
 
 - 某些工具依赖客户端能力，只有客户端支持时才应注册：
-  - `get-roots-list`
-  - `trigger-elicitation-request`
-  - `trigger-sampling-request`
+- `get-roots-list`
+- `trigger-elicitation-request`
+- `trigger-sampling-request`
 - 客户端能力只有在初始化握手完成后才可确定。
 - 大多数工具会在 Server Factory 执行阶段（客户端连接前）立即注册。
 - 这些条件工具会延迟到 `oninitialized` 回调中，通过 `registerConditionalTools(server)` 注册。

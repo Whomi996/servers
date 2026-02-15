@@ -1,4 +1,4 @@
-# Model Context Protocol servers
+# 模型上下文协议服务器
 
 本仓库收录了 [Model Context Protocol](https://modelcontextprotocol.io/)（MCP）的*参考实现*，并提供社区服务器及相关资源的索引入口。
 
@@ -594,7 +594,7 @@
 - **[Airbnb](https://github.com/openbnb-org/mcp-server-airbnb)** - 提供搜索 Airbnb 并获取房源详细信息的工具。
 - **[Airflow](https://github.com/yangkyeongmo/mcp-server-apache-airflow)** - 使用官方 python 客户端连接到 [Apache Airflow](https://airflow.apache.org/) 的 MCP 服务器。
 - **[Airtable](https://github.com/domdomegg/airtable-mcp-server)** - 通过架构检查对 [Airtable](https://airtable.com/) 数据库进行读写访问。
-- **[Airtable](https://github.com/felores/airtable-mcp)** - Airtable Model Context Protocol Servers。
+- **[Airtable](https://github.com/felores/airtable-mcp)** - Airtable 模型上下文协议服务器。
 - **[Algorand](https://github.com/GoPlausible/algorand-mcp)** - 用于工具交互 (40+) 和资源可访问性 (60+) 的综合 MCP 服务器，以及与 Algorand 区块链交互的许多有用提示。
 - **[Amadeus](https://github.com/donghyun-chae/mcp-amadeus)** (by donghyun-chae) - 用于访问、探索 Amadeus Flight Offers Search API 并与之交互的 MCP 服务器，用于检索详细的航班选项，包括航空公司、时间、持续时间和定价数据。
 - **[Amazon Ads](https://github.com/MarketplaceAdPros/amazon-ads-mcp-server)** - MCP 服务器通过 [MarketplaceAdPros](https://marketplaceadpros.com)/ 提供与亚马逊广告的交互功能

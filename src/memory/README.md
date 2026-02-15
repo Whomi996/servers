@@ -1,4 +1,4 @@
-# Knowledge Graph Memory Server
+# 知识图谱内存服务器
 
 一个基于本地知识图谱的持久化记忆基础实现。它可以让 Claude 在多轮对话之间记住用户信息。
 
@@ -61,7 +61,7 @@
 
 ### Tools
 
-- **create_entities**
+- **创建实体**
   - 在知识图谱中创建多个实体
   - 输入：`entities`（对象数组）
     - 每个对象包含：
@@ -70,7 +70,7 @@
       - `observations`（string[]）：关联观察
   - 同名实体会被忽略
 
-- **create_relations**
+- **创建关系**
   - 创建多个实体关系
   - 输入：`relations`（对象数组）
     - 每个对象包含：
@@ -79,7 +79,7 @@
       - `relationType`（string）：主动语态关系类型
   - 重复关系会被跳过
 
-- **add_observations**
+- **添加观察结果**
   - 为已有实体追加观察信息
   - 输入：`observations`（对象数组）
     - 每个对象包含：
@@ -88,13 +88,13 @@
   - 返回每个实体新增的观察内容
   - 若实体不存在则失败
 
-- **delete_entities**
+- **删除_实体**
   - 删除实体及其关系
   - 输入：`entityNames`（string[]）
   - 会级联删除关联关系
   - 实体不存在时静默处理
 
-- **delete_observations**
+- **删除观察**
   - 删除实体上的指定观察
   - 输入：`deletions`（对象数组）
     - 每个对象包含：
@@ -102,7 +102,7 @@
       - `observations`（string[]）：要删除的观察
   - 观察不存在时静默处理
 
-- **delete_relations**
+- **删除_关系**
   - 删除指定关系
   - 输入：`relations`（对象数组）
     - 每个对象包含：
@@ -111,12 +111,12 @@
       - `relationType`（string）：关系类型
   - 关系不存在时静默处理
 
-- **read_graph**
+- **读图**
   - 读取完整知识图谱
   - 无需输入
   - 返回所有实体与关系
 
-- **search_nodes**
+- **搜索节点**
   - 按查询词搜索节点
   - 输入：`query`（string）
   - 搜索范围：
@@ -125,7 +125,7 @@
     - observation 内容
   - 返回匹配实体及其关系
 
-- **open_nodes**
+- **开放节点**
   - 按名称获取指定节点
   - 输入：`names`（string[]）
   - 返回：
@@ -139,7 +139,7 @@
 
 将以下配置添加到 `claude_desktop_config.json`：
 
-#### Docker
+#### 码头工人
 
 ```json
 {
@@ -225,7 +225,7 @@
 }
 ```
 
-#### Docker
+#### 码头工人
 
 ```json
 {
@@ -279,7 +279,7 @@ Follow these steps for each interaction:
 
 ## 构建
 
-Docker：
+码头工人：
 
 ```sh
 docker build -t mcp/memory -f src/memory/Dockerfile .

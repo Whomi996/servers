@@ -1,4 +1,4 @@
-# Time MCP Server
+# 时间 MCP 服务器
 
 <!-- mcp-name: io.github.modelcontextprotocol/server-time -->
 

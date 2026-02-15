@@ -107,8 +107,8 @@ src/everything
   - `registerResources(server)` 汇总入口
 - `templates.ts`
   - 使用 `ResourceTemplate` 注册两类动态模板资源：
-    - Text：`demo://resource/dynamic/text/{index}`（MIME：`text/plain`）
-    - Blob：`demo://resource/dynamic/blob/{index}`（MIME：`application/octet-stream`，Base64）
+- 文字：`demo://resource/dynamic/text/{index}`（MIME：`text/plain`）
+- Blob：`demo://resource/dynamic/blob/{index}`（MIME：`application/octet-stream`，Base64）
   - `{index}` 必须是有限正整数，内容按需生成并带时间戳
   - 导出 `textResource(...)`、`textResourceUri(...)`、`blobResource(...)`、`blobResourceUri(...)` 供其他模块直接构造资源（如 prompts）
 - `files.ts`

@@ -1,4 +1,4 @@
-# Filesystem MCP Server
+# 文件系统 MCP 服务器
 
 一个基于 Node.js 的 Model Context Protocol（MCP）文件系统服务器实现。
 
@@ -65,33 +65,33 @@ mcp-server-filesystem /path/to/dir1 /path/to/dir2
 
 ### Tools
 
-- **read_text_file**
+- **读取文本文件**
   - 读取文本文件完整内容
   - 输入：
-    - `path`（string）
+- `path`（字符串）
     - `head`（number，可选）：前 N 行
     - `tail`（number，可选）：后 N 行
   - 无论扩展名，均按 UTF-8 文本处理
   - `head` 与 `tail` 不能同时指定
 
-- **read_media_file**
+- **读取媒体文件**
   - 读取图片或音频文件
   - 输入：
-    - `path`（string）
+- `path`（字符串）
   - 流式读取并返回 base64 数据和 MIME 类型
 
-- **read_multiple_files**
+- **读取多个文件**
   - 同时读取多个文件
   - 输入：`paths`（string[]）
   - 单文件失败不会中断整体调用
 
-- **write_file**
+- **写入文件**
   - 新建文件或覆盖已有文件（请谨慎）
   - 输入：
-    - `path`（string）
-    - `content`（string）
+- `path`（字符串）
+- `content`（字符串）
 
-- **edit_file**
+- **编辑文件**
   - 通过高级模式匹配执行选择性编辑
   - 特性：
     - 支持单行/多行匹配
@@ -101,38 +101,38 @@ mcp-server-filesystem /path/to/dir1 /path/to/dir2
     - 返回带上下文的 git 风格 diff
     - 支持 dry run 预览
   - 输入：
-    - `path`（string）
-    - `edits`（array）
+- `path`（字符串）
+- `edits`（数组）
       - `oldText`（string）：待匹配文本（可为子串）
       - `newText`（string）：替换文本
     - `dryRun`（boolean）：仅预览不落盘（默认 `false`）
   - `dryRun` 时返回匹配与差异信息；否则直接应用
   - 最佳实践：先用 `dryRun` 预览再执行
 
-- **create_directory**
+- **创建目录**
   - 创建目录（若已存在则保持不变）
   - 输入：`path`（string）
   - 可自动创建父目录
 
-- **list_directory**
+- **列表目录**
   - 列出目录内容（带 `[FILE]` / `[DIR]` 前缀）
   - 输入：`path`（string）
 
-- **list_directory_with_sizes**
+- **list_directory_with_size**
   - 列出目录内容并显示大小
   - 输入：
-    - `path`（string）
+- `path`（字符串）
     - `sortBy`（string，可选）：`name` 或 `size`（默认 `name`）
   - 返回大小明细与汇总统计（文件数、目录数、总大小）
 
-- **move_file**
+- **移动文件**
   - 移动/重命名文件和目录
   - 输入：
-    - `source`（string）
-    - `destination`（string）
+- `source`（字符串）
+- `destination`（字符串）
   - 若目标已存在则失败
 
-- **search_files**
+- **搜索文件**
   - 递归搜索文件/目录（支持排除模式）
   - 输入：
     - `path`（string）：起始目录
@@ -141,21 +141,21 @@ mcp-server-filesystem /path/to/dir1 /path/to/dir2
   - 使用 glob 风格匹配
   - 返回匹配项完整路径
 
-- **directory_tree**
+- **目录树**
   - 获取目录递归 JSON 树
   - 输入：
-    - `path`（string）
-    - `excludePatterns`（string[]）
+- `path`（字符串）
+- `excludePatterns`（字符串[]）
   - 返回：
     - 数组条目包含：
-      - `name`（string）
-      - `type`（`file` / `directory`）
+- `name`（字符串）
+- `type`（`file` / `directory`）
       - `children`（仅目录有）
         - 空目录为 `[]`
         - 文件省略该字段
   - 输出使用 2 空格缩进
 
-- **get_file_info**
+- **获取文件信息**
   - 获取文件/目录详细元数据
   - 输入：`path`（string）
   - 返回：
@@ -166,7 +166,7 @@ mcp-server-filesystem /path/to/dir1 /path/to/dir2
     - 类型（文件/目录）
     - 权限
 
-- **list_allowed_directories**
+- **列出允许的目录**
   - 列出当前服务可访问目录
   - 无输入
   - 返回当前可读写目录列表
@@ -205,7 +205,7 @@ mcp-server-filesystem /path/to/dir1 /path/to/dir2
 
 说明：可将沙箱目录挂载到 `/projects`。加 `ro` 标记即只读挂载。
 
-### Docker
+### 码头工人
 
 注意：默认需要把所有目录挂载到 `/projects` 下。
 

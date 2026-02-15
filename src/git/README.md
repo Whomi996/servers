@@ -10,90 +10,90 @@
 
 ### 工具列表
 
-1. `git_status`
+1.`git_status`
    - 显示工作区状态
    - 输入：
      - `repo_path`（string）：Git 仓库路径
    - 返回：工作目录当前状态文本
 
-2. `git_diff_unstaged`
+2.`git_diff_unstaged`
    - 显示尚未暂存的工作区改动
    - 输入：
-     - `repo_path`（string）
+- `repo_path`（字符串）
      - `context_lines`（number，可选）：上下文行数（默认 `3`）
    - 返回：未暂存 diff
 
-3. `git_diff_staged`
+3.`git_diff_staged`
    - 显示已暂存待提交改动
    - 输入：
-     - `repo_path`（string）
+- `repo_path`（字符串）
      - `context_lines`（number，可选，默认 `3`）
    - 返回：已暂存 diff
 
-4. `git_diff`
+4.`git_diff`
    - 比较分支或提交之间的差异
    - 输入：
-     - `repo_path`（string）
+- `repo_path`（字符串）
      - `target`（string）：比较目标（分支或提交）
      - `context_lines`（number，可选，默认 `3`）
    - 返回：当前状态与目标的 diff
 
-5. `git_commit`
+5.`git_commit`
    - 提交仓库改动
    - 输入：
-     - `repo_path`（string）
+- `repo_path`（字符串）
      - `message`（string）：提交信息
    - 返回：提交成功确认及新 commit hash
 
-6. `git_add`
+6.`git_add`
    - 将文件加入暂存区
    - 输入：
-     - `repo_path`（string）
+- `repo_path`（字符串）
      - `files`（string[]）：要暂存的文件路径数组
    - 返回：暂存成功确认
 
-7. `git_reset`
+7.`git_reset`
    - 取消暂存所有已暂存改动
    - 输入：
-     - `repo_path`（string）
+- `repo_path`（字符串）
    - 返回：重置操作确认
 
-8. `git_log`
+8.`git_log`
    - 查看提交日志（支持日期过滤）
    - 输入：
-     - `repo_path`（string）
+- `repo_path`（字符串）
      - `max_count`（number，可选）：最多返回提交数（默认 `10`）
      - `start_timestamp`（string，可选）：起始时间（支持 ISO8601、相对时间、绝对日期）
      - `end_timestamp`（string，可选）：结束时间（同上）
    - 返回：包含 hash、作者、日期、消息的提交数组
 
-9. `git_create_branch`
+9.`git_create_branch`
    - 创建新分支
    - 输入：
-     - `repo_path`（string）
-     - `branch_name`（string）
+- `repo_path`（字符串）
+- `branch_name`（字符串）
      - `base_branch`（string，可选）：起始分支（默认当前分支）
    - 返回：分支创建确认
 
-10. `git_checkout`
+10.`git_checkout`
    - 切换分支
    - 输入：
-     - `repo_path`（string）
-     - `branch_name`（string）
+- `repo_path`（字符串）
+- `branch_name`（字符串）
    - 返回：切换确认
 
-11. `git_show`
+11.`git_show`
    - 显示指定修订版本内容
    - 输入：
-     - `repo_path`（string）
-     - `revision`（string）：commit hash / branch / tag
+- `repo_path`（字符串）
+- `revision`（字符串）：提交哈希/分支/标签
    - 返回：指定修订内容
 
-12. `git_branch`
+12.`git_branch`
    - 列出分支
    - 输入：
-     - `repo_path`（string）
-     - `branch_type`（string）：`local` / `remote` / `all`
+- `repo_path`（字符串）
+- `branch_type`（字符串）：`local` / `remote` / `all`
      - `contains`（string，可选）：需包含的 commit sha
      - `not_contains`（string，可选）：不得包含的 commit sha
    - 返回：分支列表

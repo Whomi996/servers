@@ -76,9 +76,9 @@ https://www.contributor-covenant.org/version/2/0/code_of_conduct.html
 
 “社区影响指南”参考了 [Mozilla 行为准则执行阶梯](https://github.com/mozilla/diversity)。
 
-[homepage]: https://www.contributor-covenant.org
+[主页]：https://www.contributor-covenant.org
 
 关于本行为准则常见问题，请参阅 FAQ：  
-https://www.contributor-covenant.org/faq  
+https://www.contributor-covenant.org/faq
 多语言翻译见：  
 https://www.contributor-covenant.org/translations

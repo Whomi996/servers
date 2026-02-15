@@ -1,4 +1,4 @@
-# Everything MCP Server
+# Everything MCP 服务器
 **[架构](docs/architecture.md)
 | [项目结构](docs/structure.md)
 | [启动流程](docs/startup.md)

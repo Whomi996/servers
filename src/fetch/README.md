@@ -1,10 +1,10 @@
-# Fetch MCP Server
+# 获取 MCP 服务器
 
 <!-- mcp-name: io.github.modelcontextprotocol/server-fetch -->
 
 一个提供网页内容抓取能力的 Model Context Protocol 服务器。它可以让 LLM 抓取网页并处理内容，将 HTML 转换为更易消费的 Markdown。
 
-> [!CAUTION]
+> [!警告]
 > 此服务器可以访问本地/内网 IP 地址，可能带来安全风险。使用时请谨慎，避免泄露敏感数据。
 
 `fetch` 工具会截断返回内容。你可以通过 `start_index` 指定从哪个字符位置开始提取，从而让模型按分块方式读取网页，直到定位到需要的信息。
@@ -17,9 +17,9 @@
   - `start_index`（integer，可选）：从该字符索引开始返回（默认 `0`）
   - `raw`（boolean，可选）：返回原始内容，不做 Markdown 转换（默认 `false`）
 
-### Prompts
+### 提示
 
-- **fetch**
+- **拿来**
   - 抓取 URL 并提取为 Markdown
   - 参数：
     - `url`（string，必填）：目标 URL

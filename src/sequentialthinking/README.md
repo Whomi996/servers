@@ -1,4 +1,4 @@
-# Sequential Thinking MCP Server
+# 顺序思维 MCP 服务器
 
 一个 MCP 服务器实现，提供结构化思考工具，用于动态、可反思的问题求解。
 
@@ -12,7 +12,7 @@
 
 ## 工具
 
-### sequential_thinking
+### 顺序思维
 
 提供详细的逐步思考流程，用于问题求解与分析。
 
@@ -44,7 +44,7 @@ Sequential Thinking 适合：
 
 将以下配置添加到 `claude_desktop_config.json`：
 
-#### npx
+#### NPX
 
 ```json
 {
@@ -60,7 +60,7 @@ Sequential Thinking 适合：
 }
 ```
 
-#### docker
+#### 码头工人
 
 ```json
 {
@@ -142,7 +142,7 @@ codex mcp add sequential-thinking npx -y @modelcontextprotocol/server-sequential
 
 ## 构建
 
-Docker：
+码头工人：
 
 ```bash
 docker build -t mcp/sequentialthinking -f src/sequentialthinking/Dockerfile .

@@ -27,7 +27,7 @@
 - `trigger-sampling-request-async`（`tools/trigger-sampling-request-async.ts`）：演示双向任务：服务端发 sampling 请求，客户端以后台任务执行；服务端轮询状态并在完成后获取结果。要求客户端支持 `tasks.requests.sampling.createMessage`。
 - `trigger-elicitation-request-async`（`tools/trigger-elicitation-request-async.ts`）：演示双向任务：服务端发 elicitation 请求，客户端后台执行；服务端轮询等待用户输入。要求客户端支持 `tasks.requests.elicitation.create`。
 
-## Prompts
+## 提示
 
 - `simple-prompt`（`prompts/simple.ts`）：无参数提示词，返回固定用户消息。
 - `args-prompt`（`prompts/args.ts`）：两个参数：`city`（必填）与 `state`（可选），组合成提问。
@@ -54,7 +54,7 @@
 - 通过 `toggle-simulated-logging` 启停会话级周期日志（级别包括 debug/info/notice/warning/error/critical/alert/emergency）
 - 客户端可通过 MCP `logging/setLevel` 设置最小接收日志级别
 
-## Tasks（SEP-1686）
+## 任务（SEP-1686）
 
 服务端声明支持 MCP Tasks，可用于长任务状态跟踪：
 
@@ -91,9 +91,9 @@ MCP Tasks 是双向的，服务端和客户端都可以成为任务执行方：
 
 | 方向 | 请求类型 | 任务执行方 | 演示工具 |
 | --- | --- | --- | --- |
-| Client -> Server | `tools/call` | Server | `simulate-research-query` |
-| Server -> Client | `sampling/createMessage` | Client | `trigger-sampling-request-async` |
-| Server -> Client | `elicitation/create` | Client | `trigger-elicitation-request-async` |
+|客户端 -> 服务器 | `tools/call` |服务器| `simulate-research-query` |
+|服务器->客户端| `sampling/createMessage` |客户| `trigger-sampling-request-async` |
+|服务器->客户端| `elicitation/create` |客户| `trigger-elicitation-request-async` |
 
 对于客户端侧任务：
 

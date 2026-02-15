@@ -12,9 +12,9 @@
 - 用法：`node dist/index.js [stdio|sse|streamableHttp]`
 - 根据指定参数运行对应的**传输管理器**
 - 通过命令行指定传输类型（默认 `stdio`）
-  - `stdio` → `transports/stdio.js`
-  - `sse` → `transports/sse.js`
-  - `streamableHttp` → `transports/streamableHttp.js`
+- `stdio` → `transports/stdio.js`
+- `sse` → `transports/sse.js`
+- `streamableHttp` → `transports/streamableHttp.js`
 
 ## 2. 传输管理器（Transport Manager）
 
@@ -22,12 +22,12 @@
   - 并连接到 MCP SDK 中对应传输实现
 - 按 MCP 规范处理该传输下的通信
 
-  - **STDIO**
+- **STDIO**
     - 进程绑定、单连接模型
     - 连接后调用 `clientConnect()`
     - `SIGINT` 时关闭并调用 `cleanup()`
 
-  - **SSE**
+- **上海证券交易所**
     - 支持多客户端连接
     - 客户端传输实例按 `sessionId` 进行映射
     - 连接后调用 `clientConnect(sessionId)`
@@ -36,7 +36,7 @@
       - `/sse`（`GET`，SSE 流）
       - `/message`（`POST`，JSON-RPC 消息）
 
-  - **Streamable HTTP**
+- **流式 HTTP**
     - 支持多客户端连接
     - 客户端传输按 `sessionId` 映射
     - 连接后调用 `clientConnect(sessionId)`
@@ -51,12 +51,12 @@
 
 - 调用 `server/index.ts` 中的 `createServer()`
 - 创建新的 `McpServer` 实例，包含：
-  - **Capabilities**
-    - `tools: {}`
-    - `logging: {}`
-    - `prompts: {}`
-    - `resources: { subscribe: true }`
-  - **Server Instructions**
+- **能力**
+- `tools: {}`
+- `logging: {}`
+- `prompts: {}`
+- `resources: { subscribe: true }`
+- **服务器说明**
     - 从 docs 目录（`server-instructions.md`）加载
   - **注册项**
     - `registerTools(server)` 注册 tools
